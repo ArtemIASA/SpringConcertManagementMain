@@ -1,10 +1,27 @@
 package entities;
 
-public class Arena {
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+
+import java.util.UUID;
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="class")
+public class Arena {
+    private UUID id;
     private String name;
     private String address;
     private int capacity;
+
+    public Arena() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Arena(String name, String address, int capacity) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.address = address;
+        this.capacity = capacity;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -28,5 +45,9 @@ public class Arena {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

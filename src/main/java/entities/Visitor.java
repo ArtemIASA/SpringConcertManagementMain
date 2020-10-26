@@ -1,11 +1,24 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import java.util.UUID;
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="visitor")
 public class Visitor {
+    private UUID id;
     private String name;
     private String phoneNumber;
 
+    public Visitor() {
+        this.id = UUID.randomUUID();
+    }
 
-
+    public Visitor(String name, String phoneNumber) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     private static void validatePhoneNumber(String phoneNumber){
         String regex = "\\d{3}-\\d{3}-\\d{4}";
@@ -28,5 +41,13 @@ public class Visitor {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

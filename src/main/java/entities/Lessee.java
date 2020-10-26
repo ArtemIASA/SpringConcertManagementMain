@@ -1,12 +1,25 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import java.util.UUID;
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="lessee")
 public class Lessee {
+    private UUID id;
     private String name;
     private String phoneNumber;
     private String email;
 
     public Lessee() {
+        this.id = UUID.randomUUID();
+    }
 
+    public Lessee(String name, String phoneNumber, String email) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public String getName() {

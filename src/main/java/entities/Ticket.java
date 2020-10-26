@@ -1,30 +1,54 @@
 package entities;
 
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.UUID;
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="ticket")
 public class Ticket {
-    private Visitor visitor;
-    private Concert concert;
+    private UUID id;
+    private UUID visitor_id;
+    private UUID concert_id;
     private int price;
+
+    public Ticket() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Ticket(Visitor visitor, Concert concert, int price) {
+        this.id = UUID.randomUUID();
+        this.visitor_id = visitor.getId();
+        this.concert_id = concert.getId();
+        this.price = price;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getVisitor_id() {
+        return visitor_id;
+    }
+
+    public void setVisitor_id(UUID visitor_id) {
+        this.visitor_id = visitor_id;
+    }
+
+    public UUID getConcert_id() {
+        return concert_id;
+    }
+
+    public void setConcert_id(UUID concert_id) {
+        this.concert_id = concert_id;
+    }
 
     public int getPrice() {
         return price;
-    }
-
-    public Visitor getVisitor() {
-        return visitor;
-    }
-
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
-    }
-
-    public Concert getConcert() {
-        return concert;
-    }
-
-    public void setConcert(Concert concert) {
-        this.concert = concert;
     }
 
     public void setPrice(int price) {
